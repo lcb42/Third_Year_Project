@@ -123,6 +123,7 @@ class MyListener(object):
             x = real_time_data.insert_one(data)
             print("Inserted at: ", x.inserted_id)
 
+        # All Stations in Hampshire area
         if stanox in stanox_hants_stn_list:
             print("\n**** ", get_stanox(stanox), "****\n")
             print(data)
