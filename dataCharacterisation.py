@@ -19,6 +19,126 @@ def check_status(mins, status):
     else:
         return mins
 
+
+def get_station(station):
+
+    switcher = {
+        '23': "Arriva Trains Northern",
+        '71': "Transport for Wales",
+        '79': "c2c",
+        '35': "Caledonian Sleeper",
+        '74': "Chiltern Railway",
+        '27': "CrossCountry",
+        '34': "Devon and Cornwall Railways",
+        '28': "East Midlands Trains",
+        '06': "Eurostar",
+        '26': "First Capital Connect (defunct)",
+        '55': "First Hull Trains",
+        '81': "Gatwick Express",
+        '54': "GB Railfreight",
+        '88': "Govia Thameslink Railway / Southern",
+        '22': "Grand Central",
+        '25': "Great Western Railway",
+        '21': "Greater Anglia",
+        '24': "Heathrow Connect",
+        '86': "Heathrow Express",
+        '85': "Island Lines",
+        '29': "London Midlands",
+        '30': "London Overground",
+        '64': "Merseyrail",
+        '00': "Network Rail",
+        '56': "Nexus",
+        '51': "North Yorkshire Moors Railway",
+        '60': "ScotRail",
+        '84': "South Western Railway",
+        '19': "South Yorkshire Supertram",
+        '80': "Southeastern",
+        '33': "TFL Rail",
+        '20': "TransPennine Express",
+        '65': "Virgin Trains",
+        '61': "Virgin Trains East Coast",
+        '50': "West Coast Railway Co."
+    }
+
+    return switcher.get(station, "Invalid Station")
+
+
+def get_stanox(stanox):
+
+    switcher = {
+        '87031': "AHT",
+        '87021': "AON",
+        '86074': "ADV",
+        '87763': "AHS",
+        '86066': "BSK",
+        '86896': "BEU",
+        '86339': "BDH",
+        '87024': "BTY",
+        '86216': "BTE",
+        '87009': "BAW",
+        '86202': "BOE",
+        '86921': "BMH",
+        '86061': "BMY",
+        '86901': "BCU",
+        '86223': "BUO",
+        '86108': "CFR",
+        '86915': "CHR",
+        '86301': "CSA",
+        '86112': "DEN",
+        '86107': "DBG",
+        '86087': "ESL",
+        '86343': "EMS",
+        '86241': "FRM",
+        '86042': "FNB",
+        '87010': "FNN",
+        '87026': "FNH",
+        '86045': "FLE",
+        '86321': "FTN",
+        '86077': "GRT",
+        '86222': "HME",
+        '87062': "HSL",
+        '86341': "HAV",
+        '86201': "HDE",
+        '86332': "HLS",
+        '86913': "HNA",
+        '86049': "HOK",
+        '87064': "LIP",
+        '87065': "LIS",
+        '86908': "LYP",
+        '86907': "LYT",
+        '86081': "MIC",
+        '86527': "MBK",
+        '86219': "NTL",
+        '86911': "NWM",
+        '87012': "NCM",
+        '86070': "OVR",
+        '87066': "PTR",
+        '86917': "POK",
+        '86248': "PTC",
+        '86313': "PMS",
+        '86311': "PMH",
+        '86703': "RDB",
+        '86101': "ROM",
+        '87067': "RLN",
+        '86122': "SAL",
+        '86084': "SHW",
+        '86218': "SHO",
+        '86495': "SOA",
+        '86520': "SOU",
+        '86499': "SDN",
+        '86225': "SNW",
+        '86909': "SWY",
+        '86497': "SWG",
+        '86711': "TTN",
+        '86342': "WBL",
+        '86071': "WCH",
+        '86083': "WIN",
+        '86047': "WNF",
+        '86215': "WLS"
+    }
+
+    return switcher.get(stanox, "Invalid Stanox")
+
 client = MongoClient()
 
 dblist = client.list_database_names()
@@ -130,6 +250,45 @@ average = total/count
 print("Average Mins off Timetable: ", average)
 
 
-# Average delay based on TOC
+# Average delay based at station
+stations = set()
+for x in neg_data:
+    stations.add(x[12])
+
+
+print("Average Mins off Timetable: ")
+for y in stations:
+    temp_count = 0
+    temp_sum = 0
+    for x in neg_data:
+        if x[12] == y:
+            temp_count += 1
+            temp_sum += x[2]
+    print(get_stanox(y), ": ", temp_sum/temp_count)
+
+print()
+
+# Average delay based on toc
+tocs = set()
+for x in neg_data:
+    tocs.add(x[11])
+
+
+print("Average Mins off Timetable: ")
+for y in tocs:
+    temp_count = 0
+    temp_sum = 0
+    for x in neg_data:
+        if x[11] == y:
+            temp_count += 1
+            temp_sum += x[2]
+    print(get_station(y), ": ", temp_sum/temp_count)
+
+print()
 
 # Average delay based on Train Service Line
+
+# Busiest Station
+
+# Busiest Train Service
+
