@@ -20,7 +20,7 @@ def check_status(mins, status):
         return mins
 
 
-def get_station(station):
+def get_operator(operator):
 
     switcher = {
         '23': "Arriva Trains Northern",
@@ -60,7 +60,7 @@ def get_station(station):
         '50': "West Coast Railway Co."
     }
 
-    return switcher.get(station, "Invalid Station")
+    return switcher.get(operator, "Invalid Station")
 
 
 def get_stanox(stanox):
@@ -252,6 +252,7 @@ print("Average Mins off Timetable: ", average)
 
 # Average delay based at station
 stations = set()
+stations_dict = dict()
 for x in neg_data:
     stations.add(x[12])
 
@@ -265,11 +266,26 @@ for y in stations:
             temp_count += 1
             temp_sum += x[2]
     print(get_stanox(y), ": ", temp_sum/temp_count)
+    stations_dict[y] = temp_sum / temp_count
+
+print()
+
+# Latest/Earliest (on average) station
+earliest = ""
+latest = ""
+for key in stations_dict:
+    if stations_dict[key] == sorted(stations_dict.values())[0]:
+        latest = key
+    elif stations_dict[key] == sorted(stations_dict.values())[52]:
+        earliest = key
+
+print("On Average Station Most Late : ", get_stanox(latest), " Mins Delayed: ", sorted(stations_dict.values())[0], " On Average Station Most Early: ", get_stanox(earliest), " Mins Early:", sorted(stations_dict.values())[52])
 
 print()
 
 # Average delay based on toc
 tocs = set()
+tocs_dict = dict()
 for x in neg_data:
     tocs.add(x[11])
 
@@ -282,13 +298,95 @@ for y in tocs:
         if x[11] == y:
             temp_count += 1
             temp_sum += x[2]
-    print(get_station(y), ": ", temp_sum/temp_count)
+    print(get_operator(y), ": ", temp_sum/temp_count)
+    tocs_dict[y] = temp_sum / temp_count
 
 print()
 
+# Latest/Earliest (on average) train operating company
+earliest = ""
+latest = ""
+for key in tocs_dict:
+    if tocs_dict[key] == sorted(tocs_dict.values())[0]:
+        latest = key
+    elif tocs_dict[key] == sorted(tocs_dict.values())[4]:
+        earliest = key
+
+print("On Average Train Operator Most Late: ", get_operator(latest), " Mins Delayed: ", sorted(tocs_dict.values())[0], " On Average Train Operator Most Early: ", get_operator(earliest), " Mins Early:", sorted(tocs_dict.values())[4])
+print()
+
 # Average delay based on Train Service Line
+services = set()
+services_dict = dict()
+for x in neg_data:
+    services.add(x[10])
+
+
+print("Average Mins off Timetable: ")
+for y in services:
+    temp_count = 0
+    temp_sum = 0
+    for x in neg_data:
+        if x[10] == y:
+            temp_count += 1
+            temp_sum += x[2]
+    print(y, ": ", temp_sum/temp_count)
+    services_dict[y] = temp_sum/temp_count
+
+print()
+
+# Latest/Earliest (on average) service
+earliest = ""
+latest = ""
+for key in services_dict:
+    if services_dict[key] == sorted(services_dict.values())[0]:
+        latest = key
+    elif services_dict[key] == sorted(services_dict.values())[30]:
+        earliest = key
+
+print("On Average Service Most Late: ", latest, " Mins Delayed: ", sorted(services_dict.values())[0], " On Average Service Most Early: ", earliest, " Mins Early:", sorted(services_dict.values())[30])
+
+print()
 
 # Busiest Station
+stations_count_dict = dict()
 
-# Busiest Train Service
+for y in stations:
+    temp_count = 0
+    for x in neg_data:
+        if x[12] == y:
+            temp_count += 1
+    stations_count_dict[y] = temp_count
+
+most_busy = ""
+least_busy = ""
+for key in stations_count_dict:
+    if stations_count_dict[key] == sorted(stations_count_dict.values())[0]:
+        least_busy = key
+    elif stations_count_dict[key] == sorted(stations_count_dict.values())[2]:
+        most_busy = key
+
+print("On Average Station Most Busy: ", get_stanox(most_busy), " Visits: ", sorted(stations_count_dict.values())[0], " On Average Service Least Busy: ", get_stanox(least_busy), " Visits:", sorted(stations_count_dict.values())[52])
+print()
+# Most Common Train Service
+
+
+services_count_dict = dict()
+
+for y in services:
+    temp_count = 0
+    for x in neg_data:
+        if x[10] == y:
+            temp_count += 1
+    services_count_dict[y] = temp_count
+
+most_common = ""
+least_common = ""
+for key in services_count_dict:
+    if services_count_dict[key] == sorted(services_count_dict.values())[0]:
+        least_common = key
+    elif services_count_dict[key] == sorted(services_count_dict.values())[30]:
+        most_common = key
+
+print("On Average Service Most Common: ", most_common, " Number of Services: ", sorted(services_count_dict.values())[0], " On Average Service Least Common: ", least_common, " Number of Services:", sorted(services_count_dict.values())[30])
 
