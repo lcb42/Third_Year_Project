@@ -1,5 +1,6 @@
 # Data Characterisation
 # Work out what the data consists of, and understand which elements of the data are useful
+import json
 
 from pymongo import MongoClient
 from sklearn.feature_extraction import DictVectorizer
@@ -139,19 +140,21 @@ def get_stanox(stanox):
 
     return switcher.get(stanox, "Invalid Stanox")
 
+
 client = MongoClient()
 
 dblist = client.list_database_names()
 
 db = client["Third_Year_Project"]
 
-real_time_data = db["Real_Time_Data_HANTS_1"]
+real_time_data = db["Real_Time_Data_HANTS_2_2weeks"]
 
 # Import Data
 
 json_data = real_time_data.find({"header.msg_type": '0003'})
 json_change_orig_data = real_time_data.find({"header.msg_type": '0006'})
 json_cancel_data = real_time_data.find({"header.msg_type": "0002"})
+
 
 data = []
 change_orig_data = []
@@ -185,9 +188,9 @@ for x in json_cancel_data:
 
 # flatten_dict(data_body)
 
-print(data)
-print(change_orig_data)
-print(cancel_data)
+# print(data)
+# print(change_orig_data)
+# print(cancel_data)
 
 
 # ANALYSIS data using graphs/general stats
@@ -213,7 +216,20 @@ for x in data:
 print()
 print("************************************* STATS ****************************************")
 print()
-print("EARLY: ", early, " | LATE: ", late, " | ON TIME: ", ontime, " | OFF ROUTE: ", offroute)
+print("EARLY: ", early, " (", round((early/len(data))*100), "%)  | LATE: ", late, " (", round((late/len(data))*100), "%)  | ON TIME: ", ontime, " (", round((ontime/len(data))*100), "%)  | OFF ROUTE: ", offroute, " (", round((offroute/len(data))*100), "%)")
+print()
+
+dep = 0
+arr = 0
+for x in data:
+    if x[0] == "DEPARTURE":
+        dep += 1
+    elif x[0] == "ARRIVAL":
+        arr += 1
+
+print("DEPARTURES: ", dep, "  |  ARRIVALS: ", arr)
+print("// Interesting")
+print()
 
 # Average number of minutes late/early
 # Neg_data is form with mins in negative if appropriate
@@ -248,24 +264,27 @@ for x in neg_data:
 average = total/count
 
 print("Average Mins off Timetable: ", average)
-
+print()
 
 # Average delay based at station
 stations = set()
 stations_dict = dict()
+late = 0
 for x in neg_data:
     stations.add(x[12])
 
-
-print("Average Mins off Timetable: ")
+print("Average Mins off Timetable / Percentage of trains which are late: ")
 for y in stations:
     temp_count = 0
     temp_sum = 0
+    late = 0
     for x in neg_data:
         if x[12] == y:
             temp_count += 1
             temp_sum += x[2]
-    print(get_stanox(y), ": ", temp_sum/temp_count)
+            if x[9] == "LATE":
+                late += 1
+    print(get_stanox(y), ": ", round(temp_sum/temp_count, 2), "Mins off \t\t", round((late/temp_count)*100), "% Late")
     stations_dict[y] = temp_sum / temp_count
 
 print()
@@ -276,10 +295,10 @@ latest = ""
 for key in stations_dict:
     if stations_dict[key] == sorted(stations_dict.values())[0]:
         latest = key
-    elif stations_dict[key] == sorted(stations_dict.values())[52]:
+    elif stations_dict[key] == sorted(stations_dict.values())[len(stations_dict)-1]:
         earliest = key
 
-print("On Average Station Most Late : ", get_stanox(latest), " Mins Delayed: ", sorted(stations_dict.values())[0], " On Average Station Most Early: ", get_stanox(earliest), " Mins Early:", sorted(stations_dict.values())[52])
+print("On Average Station Most Late : ", get_stanox(latest), " Mins Delayed: ", sorted(stations_dict.values())[0], " On Average Station Most Early: ", get_stanox(earliest), " Mins Early:", sorted(stations_dict.values())[len(stations_dict)-1])
 
 print()
 
@@ -294,11 +313,14 @@ print("Average Mins off Timetable: ")
 for y in tocs:
     temp_count = 0
     temp_sum = 0
+    late = 0
     for x in neg_data:
         if x[11] == y:
             temp_count += 1
             temp_sum += x[2]
-    print(get_operator(y), ": ", temp_sum/temp_count)
+            if x[9] == "LATE":
+                late += 1
+    print(get_operator(y), ": \t\t", round(temp_sum/temp_count, 2), "Mins off \t\t", round((late/temp_count)*100), "% Late")
     tocs_dict[y] = temp_sum / temp_count
 
 print()
@@ -309,10 +331,10 @@ latest = ""
 for key in tocs_dict:
     if tocs_dict[key] == sorted(tocs_dict.values())[0]:
         latest = key
-    elif tocs_dict[key] == sorted(tocs_dict.values())[4]:
+    elif tocs_dict[key] == sorted(tocs_dict.values())[len(tocs)-1]:
         earliest = key
 
-print("On Average Train Operator Most Late: ", get_operator(latest), " Mins Delayed: ", sorted(tocs_dict.values())[0], " On Average Train Operator Most Early: ", get_operator(earliest), " Mins Early:", sorted(tocs_dict.values())[4])
+print("On Average Train Operator Most Late: ", get_operator(latest), " Mins Delayed: ", sorted(tocs_dict.values())[0], " On Average Train Operator Most Early: ", get_operator(earliest), " Mins Early:", sorted(tocs_dict.values())[len(tocs)-1])
 print()
 
 # Average delay based on Train Service Line
@@ -326,11 +348,14 @@ print("Average Mins off Timetable: ")
 for y in services:
     temp_count = 0
     temp_sum = 0
+    late = 0
     for x in neg_data:
         if x[10] == y:
             temp_count += 1
             temp_sum += x[2]
-    print(y, ": ", temp_sum/temp_count)
+            if x[9] == "LATE":
+                late += 1
+    print(y, ": ", round(temp_sum/temp_count, 2), "Mins off \t\t", round((late/temp_count)*100), "% Late")
     services_dict[y] = temp_sum/temp_count
 
 print()
@@ -341,10 +366,10 @@ latest = ""
 for key in services_dict:
     if services_dict[key] == sorted(services_dict.values())[0]:
         latest = key
-    elif services_dict[key] == sorted(services_dict.values())[30]:
+    elif services_dict[key] == sorted(services_dict.values())[len(services_dict)-1]:
         earliest = key
 
-print("On Average Service Most Late: ", latest, " Mins Delayed: ", sorted(services_dict.values())[0], " On Average Service Most Early: ", earliest, " Mins Early:", sorted(services_dict.values())[30])
+print("On Average Service Most Late: ", latest, " Mins Delayed: ", sorted(services_dict.values())[0], " On Average Service Most Early: ", earliest, " Mins Early:", sorted(services_dict.values())[len(services_dict)-1])
 
 print()
 
@@ -363,10 +388,10 @@ least_busy = ""
 for key in stations_count_dict:
     if stations_count_dict[key] == sorted(stations_count_dict.values())[0]:
         least_busy = key
-    elif stations_count_dict[key] == sorted(stations_count_dict.values())[2]:
+    elif stations_count_dict[key] == sorted(stations_count_dict.values())[len(stations_count_dict)-1]:
         most_busy = key
 
-print("On Average Station Most Busy: ", get_stanox(most_busy), " Visits: ", sorted(stations_count_dict.values())[0], " On Average Service Least Busy: ", get_stanox(least_busy), " Visits:", sorted(stations_count_dict.values())[52])
+print("On Average Station Most Busy: ", get_stanox(most_busy), " Visits: ", sorted(stations_count_dict.values())[0], " On Average Service Least Busy: ", get_stanox(least_busy), " Visits:", sorted(stations_count_dict.values())[len(stations_count_dict)-1])
 print()
 # Most Common Train Service
 
@@ -384,9 +409,9 @@ most_common = ""
 least_common = ""
 for key in services_count_dict:
     if services_count_dict[key] == sorted(services_count_dict.values())[0]:
-        least_common = key
-    elif services_count_dict[key] == sorted(services_count_dict.values())[30]:
         most_common = key
+    elif services_count_dict[key] == sorted(services_count_dict.values())[len(services_count_dict)-1]:
+        least_common = key
 
-print("On Average Service Most Common: ", most_common, " Number of Services: ", sorted(services_count_dict.values())[0], " On Average Service Least Common: ", least_common, " Number of Services:", sorted(services_count_dict.values())[30])
+print("On Average Service Most Common: ", most_common, " Number of Services: ", sorted(services_count_dict.values())[0], " On Average Service Least Common: ", least_common, " Number of Services:", sorted(services_count_dict.values())[len(services_count_dict)-1])
 
