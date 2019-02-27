@@ -3,8 +3,6 @@
 import json
 
 from pymongo import MongoClient
-from sklearn.feature_extraction import DictVectorizer
-import collections
 
 # Function to replace a space with a specified character
 def replace_space(element, char):
