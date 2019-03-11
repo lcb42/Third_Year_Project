@@ -8,6 +8,9 @@ import datetime as dt
 import pandas as pd
 import seaborn as sns
 pd.set_option('display.max_columns', None)
+import warnings
+warnings.filterwarnings("ignore")
+
 
 # functions required
 def replace_space(element, char):
@@ -268,53 +271,400 @@ X_train, X_test, y_train, y_test = train_test_split(X_train_test, y_train_test, 
 # Quick Random Forest
 
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Lasso
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import ElasticNet
+from sklearn.linear_model import BayesianRidge
+from sklearn.linear_model import PassiveAggressiveRegressor
+from sklearn.linear_model import HuberRegressor
+from sklearn.linear_model import RANSACRegressor
+from sklearn.linear_model import ARDRegression
+from sklearn.linear_model import SGDRegressor
+from sklearn.linear_model import Ridge
+from sklearn.linear_model import Perceptron
+from sklearn.neural_network import MLPRegressor
+from sklearn.ensemble import AdaBoostRegressor
+from sklearn.ensemble import BaggingRegressor
+from sklearn.ensemble import ExtraTreesRegressor
+from sklearn.ensemble import GradientBoostingRegressor
+# Anything else?
 
 
+# K Fold Cross Validation
+from sklearn.model_selection import KFold
 
-test_rmses = []
-train_rmses = []
-ns = [1,5,10,50,100,500,1000]
-repeats = 5
+splits = 10
 
-for x in ns:
+kf = KFold(n_splits=splits)
 
-    train_rmse_agg = 0
-    test_rmse_agg = 0
+kf_X_train_test = np.array(X_train_test)
+kf_y_train_test = np.array(y_train_test)
 
-    print(x)
-    for y in range(0, repeats):
+train_rmse_agg = 0
+test_rmse_agg = 0
 
-        regr = RandomForestRegressor(max_depth=5, n_estimators=x, n_jobs=-1)
-        # print("constructed")
-        regr.fit(X_train, y_train)
-        # print("trained")
+for train_index, test_index in kf.split(kf_X_train_test):
 
-        # print(list(df_processed))
-        # print(regr.feature_importances_.tolist())
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
 
-        train_predict = regr.predict(X_train)
-        train_rmse = np.sqrt(((y_train - train_predict) ** 2).mean())
-        # print("Training RMSE: ", train_rmse)
-        train_rmse_agg += train_rmse
+    reg = LinearRegression()
+    reg.fit(kf_X_train, kf_y_train)
 
-        test_predict = regr.predict(X_test)
-        test_rmse = np.sqrt(((y_test - test_predict) ** 2).mean())
-        # print("Testing RMSE: ", test_rmse)
-        test_rmse_agg += test_rmse
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
 
-    train_rmses.append(train_rmse_agg/repeats)
-    test_rmses.append(test_rmse_agg/repeats)
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
 
-    # print(y_test)
-    # print(test_predict)
+print("Linear Regression Training RMSE: ", train_rmse_agg / splits)
+print("Linear Regression Testing RMSE: ", test_rmse_agg / splits)
 
 
-plt.plot(ns, test_rmses, "b*", label="Test RMSE")
-plt.plot(ns, train_rmses, "r*", label="Train RMSE")
-plt.plot(ns, test_rmses, c='b')
-plt.plot(ns, train_rmses, c='r')
-plt.ylabel("RMSE Score")
-plt.xlabel("Variables of n_estimators")
-plt.xscale("log")
-plt.legend()
-plt.show()
+# Random Forest Regression
+train_rmse_agg = 0
+test_rmse_agg = 0
+
+for train_index, test_index in kf.split(kf_X_train_test):
+
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
+
+    reg = RandomForestRegressor()
+    reg.fit(kf_X_train, kf_y_train)
+
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
+
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
+
+print("RF Regression Training RMSE: ", train_rmse_agg / splits)
+print("RF Regression Testing RMSE: ", test_rmse_agg / splits)
+
+
+# Lasso Regression
+train_rmse_agg = 0
+test_rmse_agg = 0
+
+for train_index, test_index in kf.split(kf_X_train_test):
+
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
+
+    reg = Lasso()
+    reg.fit(kf_X_train, kf_y_train)
+
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
+
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
+
+print("Lasso Regression Training RMSE: ", train_rmse_agg / splits)
+print("Lasso Regression Testing RMSE: ", test_rmse_agg / splits)
+
+
+# Logistic Regression
+train_rmse_agg = 0
+test_rmse_agg = 0
+
+for train_index, test_index in kf.split(kf_X_train_test):
+
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
+
+    reg = LogisticRegression()
+    reg.fit(kf_X_train, kf_y_train)
+
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
+
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
+
+print("Logistic Regression Training RMSE: ", train_rmse_agg / splits)
+print("Logistic Regression Testing RMSE: ", test_rmse_agg / splits)
+
+
+# Elastic Net Regression
+train_rmse_agg = 0
+test_rmse_agg = 0
+
+for train_index, test_index in kf.split(kf_X_train_test):
+
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
+
+    reg = ElasticNet()
+    reg.fit(kf_X_train, kf_y_train)
+
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
+
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
+
+print("Elastic Net Regression Training RMSE: ", train_rmse_agg / splits)
+print("Elastic Net Regression Testing RMSE: ", test_rmse_agg / splits)
+
+
+# BayesianRidge Regression
+train_rmse_agg = 0
+test_rmse_agg = 0
+
+for train_index, test_index in kf.split(kf_X_train_test):
+
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
+
+    reg = BayesianRidge()
+    reg.fit(kf_X_train, kf_y_train)
+
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
+
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
+
+print("Bayesian Ridge Regression Training RMSE: ", train_rmse_agg / splits)
+print("Bayesian Ridge Regression Testing RMSE: ", test_rmse_agg / splits)
+
+
+# Passive Aggressive Regression
+train_rmse_agg = 0
+test_rmse_agg = 0
+
+for train_index, test_index in kf.split(kf_X_train_test):
+
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
+
+    reg = PassiveAggressiveRegressor()
+    reg.fit(kf_X_train, kf_y_train)
+
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
+
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
+
+print("Passive Aggressive Regression Training RMSE: ", train_rmse_agg / splits)
+print("Passive Aggressive Regression Testing RMSE: ", test_rmse_agg / splits)
+
+
+# Huber Regression
+train_rmse_agg = 0
+test_rmse_agg = 0
+
+for train_index, test_index in kf.split(kf_X_train_test):
+
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
+
+    reg = HuberRegressor()
+    reg.fit(kf_X_train, kf_y_train)
+
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
+
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
+
+print("Huber Regression Training RMSE: ", train_rmse_agg / splits)
+print("Huber Regression Testing RMSE: ", test_rmse_agg / splits)
+
+
+# RANSAC Regression
+train_rmse_agg = 0
+test_rmse_agg = 0
+
+for train_index, test_index in kf.split(kf_X_train_test):
+
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
+
+    reg = RANSACRegressor()
+    reg.fit(kf_X_train, kf_y_train)
+
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
+
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
+
+print("RANSAC Training RMSE: ", train_rmse_agg / splits)
+print("RANSAC Testing RMSE: ", test_rmse_agg / splits)
+
+
+# SGD Regression
+train_rmse_agg = 0
+test_rmse_agg = 0
+
+for train_index, test_index in kf.split(kf_X_train_test):
+
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
+
+    reg = SGDRegressor()
+    reg.fit(kf_X_train, kf_y_train)
+
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
+
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
+
+print("SGD Training RMSE: ", train_rmse_agg / splits)
+print("SGD Testing RMSE: ", test_rmse_agg / splits)
+
+
+# Ridge Regression
+train_rmse_agg = 0
+test_rmse_agg = 0
+
+for train_index, test_index in kf.split(kf_X_train_test):
+
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
+
+    reg = Ridge()
+    reg.fit(kf_X_train, kf_y_train)
+
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
+
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
+
+print("Ridge Training RMSE: ", train_rmse_agg / splits)
+print("Ridge Testing RMSE: ", test_rmse_agg / splits)
+
+
+# Perceptron
+train_rmse_agg = 0
+test_rmse_agg = 0
+
+for train_index, test_index in kf.split(kf_X_train_test):
+
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
+
+    reg = Perceptron()
+    reg.fit(kf_X_train, kf_y_train)
+
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
+
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
+
+print("Perceptron Training RMSE: ", train_rmse_agg / splits)
+print("Perceptron Testing RMSE: ", test_rmse_agg / splits)
+
+
+# Extra Trees Regression
+train_rmse_agg = 0
+test_rmse_agg = 0
+
+for train_index, test_index in kf.split(kf_X_train_test):
+
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
+
+    reg = ExtraTreesRegressor()
+    reg.fit(kf_X_train, kf_y_train)
+
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
+
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
+
+print("Extra Trees Training RMSE: ", train_rmse_agg / splits)
+print("Extra Trees Testing RMSE: ", test_rmse_agg / splits)
+
+
+# MLP Regression
+train_rmse_agg = 0
+test_rmse_agg = 0
+
+for train_index, test_index in kf.split(kf_X_train_test):
+
+    kf_X_train, kf_X_test = kf_X_train_test[train_index], kf_X_train_test[test_index]
+    kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
+
+    reg = MLPRegressor()
+    reg.fit(kf_X_train, kf_y_train)
+
+    train_predict = reg.predict(kf_X_train)
+    train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
+    train_rmse_agg += train_rmse
+
+    test_predict = reg.predict(kf_X_test)
+    test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
+    test_rmse_agg += test_rmse
+
+print("MLP Training RMSE: ", train_rmse_agg / splits)
+print("MLP Testing RMSE: ", test_rmse_agg / splits)
+
+
+# Code Structure for fine tuning algorithm hyperparameters
+# may need to improve or change metric being used to give results in respect to research and justification
+# test_rmses = []
+# train_rmses = []
+# ns = [1, 5, 10, 50,100, 500, 1000]
+# repeats = 5
+
+# for x in ns:
+
+#    train_rmse_agg = 0
+#    test_rmse_agg = 0
+
+#    print(x)
+#    for y in range(0, repeats):
+
+#        regr = RandomForestRegressor(max_depth=5, n_estimators=x, n_jobs=-1)
+#        # print("constructed")
+#        regr.fit(X_train, y_train)
+#        # print("trained")
+
+#       # print(list(df_processed))
+#        # print(regr.feature_importances_.tolist())
+
+#        train_predict = regr.predict(X_train)
+#        train_rmse = np.sqrt(((y_train - train_predict) ** 2).mean())
+#        # print("Training RMSE: ", train_rmse)
+#        train_rmse_agg += train_rmse
+
+#        test_predict = regr.predict(X_test)
+#        test_rmse = np.sqrt(((y_test - test_predict) ** 2).mean())
+#        # print("Testing RMSE: ", test_rmse)
+#        test_rmse_agg += test_rmse
