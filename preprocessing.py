@@ -301,8 +301,8 @@ kf = KFold(n_splits=splits)
 kf_X_train_test = np.array(X_train_test)
 kf_y_train_test = np.array(y_train_test)
 
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -314,19 +314,28 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("Linear Regression Training RMSE: ", train_rmse_agg / splits)
-print("Linear Regression Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+
+print("Linear Regression Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("Linear Regression Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # Random Forest Regression
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -338,19 +347,27 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("RF Regression Training RMSE: ", train_rmse_agg / splits)
-print("RF Regression Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+print("RF Regression Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("RF Regression Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # Lasso Regression
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -362,19 +379,27 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("Lasso Regression Training RMSE: ", train_rmse_agg / splits)
-print("Lasso Regression Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+print("Lasso Regression Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("Lasso Regression Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # Logistic Regression
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -386,19 +411,27 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("Logistic Regression Training RMSE: ", train_rmse_agg / splits)
-print("Logistic Regression Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+print("Logistic Regression Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("Logistic Regression Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # Elastic Net Regression
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -410,19 +443,27 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("Elastic Net Regression Training RMSE: ", train_rmse_agg / splits)
-print("Elastic Net Regression Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+print("Elastic Net Regression Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("Elastic Net Regression Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # BayesianRidge Regression
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -434,19 +475,27 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("Bayesian Ridge Regression Training RMSE: ", train_rmse_agg / splits)
-print("Bayesian Ridge Regression Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+print("Bayesian Ridge Regression Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("Bayesian Ridge Regression Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # Passive Aggressive Regression
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -458,19 +507,27 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("Passive Aggressive Regression Training RMSE: ", train_rmse_agg / splits)
-print("Passive Aggressive Regression Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+print("Passive Aggressive Regression Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("Passive Aggressive Regression Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # Huber Regression
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -482,19 +539,27 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("Huber Regression Training RMSE: ", train_rmse_agg / splits)
-print("Huber Regression Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+print("Huber Regression Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("Huber Regression Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # RANSAC Regression
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -506,19 +571,27 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("RANSAC Training RMSE: ", train_rmse_agg / splits)
-print("RANSAC Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+print("RANSAC Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("RANSAC Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # SGD Regression
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -530,19 +603,27 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("SGD Training RMSE: ", train_rmse_agg / splits)
-print("SGD Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+print("SGD Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("SGD Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # Ridge Regression
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -554,19 +635,27 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("Ridge Training RMSE: ", train_rmse_agg / splits)
-print("Ridge Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+print("Ridge Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("Ridge Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # Perceptron
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -578,19 +667,27 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("Perceptron Training RMSE: ", train_rmse_agg / splits)
-print("Perceptron Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+print("Perceptron Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("Perceptron Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # Extra Trees Regression
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -602,19 +699,27 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("Extra Trees Training RMSE: ", train_rmse_agg / splits)
-print("Extra Trees Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+print("Extra Trees Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("Extra Trees Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # MLP Regression
-train_rmse_agg = 0
-test_rmse_agg = 0
+train_rmse_agg = []
+test_rmse_agg = []
 
 for train_index, test_index in kf.split(kf_X_train_test):
 
@@ -626,14 +731,22 @@ for train_index, test_index in kf.split(kf_X_train_test):
 
     train_predict = reg.predict(kf_X_train)
     train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
-    train_rmse_agg += train_rmse
+    train_rmse_agg.append(train_rmse)
 
     test_predict = reg.predict(kf_X_test)
     test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
-    test_rmse_agg += test_rmse
+    test_rmse_agg.append(test_rmse)
 
-print("MLP Training RMSE: ", train_rmse_agg / splits)
-print("MLP Testing RMSE: ", test_rmse_agg / splits)
+# Calculate Mean
+train_mean = np.mean(train_rmse_agg)
+test_mean = np.mean(test_rmse_agg)
+
+# Calculate Var
+train_sd = np.std(train_rmse_agg)
+test_sd = np.std(test_rmse_agg)
+
+print("MLP Training RMSE: ", train_mean, "\t sd: ", train_sd)
+print("MLP Testing RMSE: ", test_mean, "\t sd: ", test_sd)
 
 
 # Code Structure for fine tuning algorithm hyperparameters
@@ -651,20 +764,3 @@ print("MLP Testing RMSE: ", test_rmse_agg / splits)
 #    print(x)
 #    for y in range(0, repeats):
 
-#        regr = RandomForestRegressor(max_depth=5, n_estimators=x, n_jobs=-1)
-#        # print("constructed")
-#        regr.fit(X_train, y_train)
-#        # print("trained")
-
-#       # print(list(df_processed))
-#        # print(regr.feature_importances_.tolist())
-
-#        train_predict = regr.predict(X_train)
-#        train_rmse = np.sqrt(((y_train - train_predict) ** 2).mean())
-#        # print("Training RMSE: ", train_rmse)
-#        train_rmse_agg += train_rmse
-
-#        test_predict = regr.predict(X_test)
-#        test_rmse = np.sqrt(((y_test - test_predict) ** 2).mean())
-#        # print("Testing RMSE: ", test_rmse)
-#        test_rmse_agg += test_rmse
