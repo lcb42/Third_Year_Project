@@ -287,31 +287,457 @@ for n in ns:
         kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
 
         # Train Linear Regression
-        lin_reg = LinearRegression()
-        lin_reg.fit(kf_X_train, kf_y_train)
+        lin_reg_1 = LinearRegression()
+        lin_reg_1.fit(kf_X_train, kf_y_train)
+
+        lin_reg_2 = LinearRegression()
+        lin_reg_2.fit(kf_X_train, kf_y_train)
+
+        lin_reg_3 = LinearRegression()
+        lin_reg_3.fit(kf_X_train, kf_y_train)
+
+        lin_reg_4 = LinearRegression()
+        lin_reg_4.fit(kf_X_train, kf_y_train)
+
+        lin_reg_5 = LinearRegression()
+        lin_reg_5.fit(kf_X_train, kf_y_train)
+
+        lin_reg_6 = LinearRegression()
+        lin_reg_6.fit(kf_X_train, kf_y_train)
+
+        lin_reg_7 = LinearRegression()
+        lin_reg_7.fit(kf_X_train, kf_y_train)
+
+        lin_reg_8 = LinearRegression()
+        lin_reg_8.fit(kf_X_train, kf_y_train)
+
+        lin_reg_9 = LinearRegression()
+        lin_reg_9.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_10 = LinearRegression()
+        # lin_reg_10.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_11 = LinearRegression()
+        # lin_reg_11.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_12 = LinearRegression()
+        # lin_reg_12.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_13 = LinearRegression()
+        # lin_reg_13.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_14 = LinearRegression()
+        # lin_reg_14.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_15 = LinearRegression()
+        # lin_reg_15.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_16 = LinearRegression()
+        # lin_reg_16.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_17 = LinearRegression()
+        # lin_reg_17.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_18 = LinearRegression()
+        # lin_reg_18.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_19 = LinearRegression()
+        # lin_reg_19.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_20 = LinearRegression()
+        # lin_reg_20.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_21 = LinearRegression()
+        # lin_reg_21.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_22 = LinearRegression()
+        # lin_reg_22.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_23 = LinearRegression()
+        # lin_reg_23.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_24 = LinearRegression()
+        # lin_reg_24.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_25 = LinearRegression()
+        # lin_reg_25.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_26 = LinearRegression()
+        # lin_reg_26.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_27 = LinearRegression()
+        # lin_reg_27.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_28 = LinearRegression()
+        # lin_reg_28.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_29 = LinearRegression()
+        # lin_reg_29.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_30 = LinearRegression()
+        # lin_reg_30.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_31 = LinearRegression()
+        # lin_reg_31.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_32 = LinearRegression()
+        # lin_reg_32.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_33 = LinearRegression()
+        # lin_reg_33.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_34 = LinearRegression()
+        # lin_reg_34.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_35 = LinearRegression()
+        # lin_reg_35.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_36 = LinearRegression()
+        # lin_reg_36.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_37 = LinearRegression()
+        # lin_reg_37.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_38 = LinearRegression()
+        # lin_reg_38.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_39 = LinearRegression()
+        # lin_reg_39.fit(kf_X_train, kf_y_train)
+        #
+        # lin_reg_40 = LinearRegression()
+        # lin_reg_40.fit(kf_X_train, kf_y_train)
 
         # Train Random Forest Regression
-        rf_reg = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
-                                    random_state=0)
-        rf_reg.fit(kf_X_train, kf_y_train)
+        rf_reg_1 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1, random_state=0)
+        rf_reg_1.fit(kf_X_train, kf_y_train)
+
+        rf_reg_2 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1, random_state=0)
+        rf_reg_2.fit(kf_X_train, kf_y_train)
+
+        rf_reg_3 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1, random_state=0)
+        rf_reg_3.fit(kf_X_train, kf_y_train)
+
+        rf_reg_4 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1, random_state=0)
+        rf_reg_4.fit(kf_X_train, kf_y_train)
+
+        rf_reg_5 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1, random_state=0)
+        rf_reg_5.fit(kf_X_train, kf_y_train)
+
+        rf_reg_6 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1, random_state=0)
+        rf_reg_6.fit(kf_X_train, kf_y_train)
+
+        rf_reg_7 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1, random_state=0)
+        rf_reg_7.fit(kf_X_train, kf_y_train)
+
+        rf_reg_8 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1, random_state=0)
+        rf_reg_8.fit(kf_X_train, kf_y_train)
+
+        rf_reg_9 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1, random_state=0)
+        rf_reg_9.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_10 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1, random_state=0)
+        # rf_reg_10.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_11 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_11.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_12 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_12.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_13 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_13.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_14 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_14.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_15 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_15.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_16 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_16.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_17 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_17.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_18 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_18.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_19 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_19.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_20 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                   random_state=0)
+        # rf_reg_20.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_21 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_21.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_22 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_22.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_23 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_23.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_24 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_24.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_25 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_25.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_26 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_26.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_27 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_27.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_28 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_28.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_29 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                  random_state=0)
+        # rf_reg_29.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_30 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                   random_state=0)
+        # rf_reg_30.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_31 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                   random_state=0)
+        # rf_reg_31.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_32 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                   random_state=0)
+        # rf_reg_32.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_33 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                   random_state=0)
+        # rf_reg_33.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_34 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                   random_state=0)
+        # rf_reg_34.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_35 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                   random_state=0)
+        # rf_reg_35.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_36 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                   random_state=0)
+        # rf_reg_36.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_37 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                   random_state=0)
+        # rf_reg_37.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_38 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                   random_state=0)
+        # rf_reg_38.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_39 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                   random_state=0)
+        # rf_reg_39.fit(kf_X_train, kf_y_train)
+        #
+        # rf_reg_40 = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1,
+        #                                   random_state=0)
+        # rf_reg_40.fit(kf_X_train, kf_y_train)
 
         # Put results of both into a pdframe
         # train pdframe
-        df_combo = pd.DataFrame()
-        df_combo['linear'] = lin_reg.predict(kf_X_train)
-        df_combo['random_forest'] = lin_reg.predict(kf_X_train)
-        df_combo['real'] = kf_y_train
+        df_train = pd.DataFrame()
+        df_train['linear_1'] = lin_reg_1.predict(kf_X_train)
+        df_train['linear_2'] = lin_reg_2.predict(kf_X_train)
+        df_train['linear_3'] = lin_reg_3.predict(kf_X_train)
+        # df_train['linear_4'] = lin_reg_4.predict(kf_X_train)
+        # df_train['linear_5'] = lin_reg_5.predict(kf_X_train)
+        # df_train['linear_6'] = lin_reg_6.predict(kf_X_train)
+        # df_train['linear_7'] = lin_reg_7.predict(kf_X_train)
+        # df_train['linear_8'] = lin_reg_8.predict(kf_X_train)
+        # df_train['linear_9'] = lin_reg_9.predict(kf_X_train)
+        # df_train['linear_10'] = lin_reg_10.predict(kf_X_train)
+        # df_train['linear_11'] = lin_reg_11.predict(kf_X_train)
+        # df_train['linear_12'] = lin_reg_12.predict(kf_X_train)
+        # df_train['linear_13'] = lin_reg_13.predict(kf_X_train)
+        # df_train['linear_14'] = lin_reg_14.predict(kf_X_train)
+        # df_train['linear_15'] = lin_reg_15.predict(kf_X_train)
+        # df_train['linear_16'] = lin_reg_16.predict(kf_X_train)
+        # df_train['linear_17'] = lin_reg_17.predict(kf_X_train)
+        # df_train['linear_18'] = lin_reg_18.predict(kf_X_train)
+        # df_train['linear_19'] = lin_reg_19.predict(kf_X_train)
+        # df_train['linear_20'] = lin_reg_20.predict(kf_X_train)
+        # df_train['linear_21'] = lin_reg_21.predict(kf_X_train)
+        # df_train['linear_22'] = lin_reg_22.predict(kf_X_train)
+        # df_train['linear_23'] = lin_reg_23.predict(kf_X_train)
+        # df_train['linear_24'] = lin_reg_24.predict(kf_X_train)
+        # df_train['linear_25'] = lin_reg_25.predict(kf_X_train)
+        # df_train['linear_26'] = lin_reg_26.predict(kf_X_train)
+        # df_train['linear_27'] = lin_reg_27.predict(kf_X_train)
+        # df_train['linear_28'] = lin_reg_28.predict(kf_X_train)
+        # df_train['linear_29'] = lin_reg_29.predict(kf_X_train)
+        # df_train['linear_30'] = lin_reg_30.predict(kf_X_train)
+        # df_train['linear_31'] = lin_reg_31.predict(kf_X_train)
+        # df_train['linear_32'] = lin_reg_32.predict(kf_X_train)
+        # df_train['linear_33'] = lin_reg_33.predict(kf_X_train)
+        # df_train['linear_34'] = lin_reg_34.predict(kf_X_train)
+        # df_train['linear_35'] = lin_reg_35.predict(kf_X_train)
+        # df_train['linear_36'] = lin_reg_36.predict(kf_X_train)
+        # df_train['linear_37'] = lin_reg_37.predict(kf_X_train)
+        # df_train['linear_38'] = lin_reg_38.predict(kf_X_train)
+        # df_train['linear_39'] = lin_reg_39.predict(kf_X_train)
+        # df_train['linear_40'] = lin_reg_40.predict(kf_X_train)
+        df_train['random_forest_1'] = rf_reg_1.predict(kf_X_train)
+        df_train['random_forest_2'] = rf_reg_2.predict(kf_X_train)
+        df_train['random_forest_3'] = rf_reg_3.predict(kf_X_train)
+        df_train['random_forest_4'] = rf_reg_4.predict(kf_X_train)
+        df_train['random_forest_5'] = rf_reg_5.predict(kf_X_train)
+        df_train['random_forest_6'] = rf_reg_6.predict(kf_X_train)
+        df_train['random_forest_7'] = rf_reg_7.predict(kf_X_train)
+        # df_train['random_forest_8'] = rf_reg_8.predict(kf_X_train)
+        # df_train['random_forest_9'] = rf_reg_9.predict(kf_X_train)
+        # df_train['random_forest_10'] = rf_reg_10.predict(kf_X_train)
+        # df_train['random_forest_11'] = rf_reg_11.predict(kf_X_train)
+        # df_train['random_forest_12'] = rf_reg_12.predict(kf_X_train)
+        # df_train['random_forest_13'] = rf_reg_13.predict(kf_X_train)
+        # df_train['random_forest_14'] = rf_reg_14.predict(kf_X_train)
+        # df_train['random_forest_15'] = rf_reg_15.predict(kf_X_train)
+        # df_train['random_forest_16'] = rf_reg_16.predict(kf_X_train)
+        # df_train['random_forest_17'] = rf_reg_17.predict(kf_X_train)
+        # df_train['random_forest_18'] = rf_reg_18.predict(kf_X_train)
+        # df_train['random_forest_19'] = rf_reg_19.predict(kf_X_train)
+        # df_train['random_forest_20'] = rf_reg_20.predict(kf_X_train)
+        # df_train['random_forest_21'] = rf_reg_21.predict(kf_X_train)
+        # df_train['random_forest_22'] = rf_reg_22.predict(kf_X_train)
+        # df_train['random_forest_23'] = rf_reg_23.predict(kf_X_train)
+        # df_train['random_forest_24'] = rf_reg_24.predict(kf_X_train)
+        # df_train['random_forest_25'] = rf_reg_25.predict(kf_X_train)
+        # df_train['random_forest_26'] = rf_reg_26.predict(kf_X_train)
+        # df_train['random_forest_27'] = rf_reg_27.predict(kf_X_train)
+        # df_train['random_forest_28'] = rf_reg_28.predict(kf_X_train)
+        # df_train['random_forest_29'] = rf_reg_29.predict(kf_X_train)
+        # df_train['random_rf_reg_30'] = rf_reg_30.predict(kf_X_train)
+        # df_train['random_rf_reg_31'] = rf_reg_31.predict(kf_X_train)
+        # df_train['random_rf_reg_32'] = rf_reg_32.predict(kf_X_train)
+        # df_train['random_rf_reg_33'] = rf_reg_33.predict(kf_X_train)
+        # df_train['random_rf_reg_34'] = rf_reg_34.predict(kf_X_train)
+        # df_train['random_rf_reg_35'] = rf_reg_35.predict(kf_X_train)
+        # df_train['random_rf_reg_36'] = rf_reg_36.predict(kf_X_train)
+        # df_train['random_rf_reg_37'] = rf_reg_37.predict(kf_X_train)
+        # df_train['random_rf_reg_38'] = rf_reg_38.predict(kf_X_train)
+        # df_train['random_rf_reg_39'] = rf_reg_39.predict(kf_X_train)
+        # df_train['random_forest_40'] = rf_reg_40.predict(kf_X_train)
+
+        df_test = pd.DataFrame()
+        df_test['linear_1'] = lin_reg_1.predict(kf_X_test)
+        df_test['linear_2'] = lin_reg_2.predict(kf_X_test)
+        df_test['linear_3'] = lin_reg_3.predict(kf_X_test)
+        # df_test['linear_4'] = lin_reg_4.predict(kf_X_test)
+        # df_test['linear_5'] = lin_reg_5.predict(kf_X_test)
+        # df_test['linear_6'] = lin_reg_6.predict(kf_X_test)
+        # df_test['linear_7'] = lin_reg_7.predict(kf_X_test)
+        # df_test['linear_8'] = lin_reg_8.predict(kf_X_test)
+        # df_test['linear_9'] = lin_reg_9.predict(kf_X_test)
+        # df_test['linear_10'] = lin_reg_10.predict(kf_X_test)
+        # df_test['linear_11'] = lin_reg_11.predict(kf_X_test)
+        # df_test['linear_12'] = lin_reg_12.predict(kf_X_test)
+        # df_test['linear_13'] = lin_reg_13.predict(kf_X_test)
+        # df_test['linear_14'] = lin_reg_14.predict(kf_X_test)
+        # df_test['linear_15'] = lin_reg_15.predict(kf_X_test)
+        # df_test['linear_16'] = lin_reg_16.predict(kf_X_test)
+        # df_test['linear_17'] = lin_reg_17.predict(kf_X_test)
+        # df_test['linear_18'] = lin_reg_18.predict(kf_X_test)
+        # df_test['linear_19'] = lin_reg_19.predict(kf_X_test)
+        # df_test['linear_20'] = lin_reg_20.predict(kf_X_test)
+        # df_test['linear_21'] = lin_reg_21.predict(kf_X_test)
+        # df_test['linear_22'] = lin_reg_22.predict(kf_X_test)
+        # df_test['linear_23'] = lin_reg_23.predict(kf_X_test)
+        # df_test['linear_24'] = lin_reg_24.predict(kf_X_test)
+        # df_test['linear_25'] = lin_reg_25.predict(kf_X_test)
+        # df_test['linear_26'] = lin_reg_26.predict(kf_X_test)
+        # df_test['linear_27'] = lin_reg_27.predict(kf_X_test)
+        # df_test['linear_28'] = lin_reg_28.predict(kf_X_test)
+        # df_test['linear_29'] = lin_reg_29.predict(kf_X_test)
+        # df_test['linear_30'] = lin_reg_30.predict(kf_X_test)
+        # df_test['linear_31'] = lin_reg_31.predict(kf_X_test)
+        # df_test['linear_32'] = lin_reg_32.predict(kf_X_test)
+        # df_test['linear_33'] = lin_reg_33.predict(kf_X_test)
+        # df_test['linear_34'] = lin_reg_34.predict(kf_X_test)
+        # df_test['linear_35'] = lin_reg_35.predict(kf_X_test)
+        # df_test['linear_36'] = lin_reg_36.predict(kf_X_test)
+        # df_test['linear_37'] = lin_reg_37.predict(kf_X_test)
+        # df_test['linear_38'] = lin_reg_38.predict(kf_X_test)
+        # df_test['linear_39'] = lin_reg_39.predict(kf_X_test)
+        # df_test['linear_40'] = lin_reg_40.predict(kf_X_test)
+        df_test['random_forest_1'] = rf_reg_1.predict(kf_X_test)
+        df_test['random_forest_2'] = rf_reg_2.predict(kf_X_test)
+        df_test['random_forest_3'] = rf_reg_3.predict(kf_X_test)
+        df_test['random_forest_4'] = rf_reg_4.predict(kf_X_test)
+        df_test['random_forest_5'] = rf_reg_5.predict(kf_X_test)
+        df_test['random_forest_6'] = rf_reg_6.predict(kf_X_test)
+        df_test['random_forest_7'] = rf_reg_7.predict(kf_X_test)
+        # df_test['random_forest_8'] = rf_reg_8.predict(kf_X_test)
+        # df_test['random_forest_9'] = rf_reg_9.predict(kf_X_test)
+        # df_test['random_forest_10'] = rf_reg_10.predict(kf_X_test)
+        # df_test['random_forest_11'] = rf_reg_11.predict(kf_X_test)
+        # df_test['random_forest_12'] = rf_reg_12.predict(kf_X_test)
+        # df_test['random_forest_13'] = rf_reg_13.predict(kf_X_test)
+        # df_test['random_forest_14'] = rf_reg_14.predict(kf_X_test)
+        # df_test['random_forest_15'] = rf_reg_15.predict(kf_X_test)
+        # df_test['random_forest_16'] = rf_reg_16.predict(kf_X_test)
+        # df_test['random_forest_17'] = rf_reg_17.predict(kf_X_test)
+        # df_test['random_forest_18'] = rf_reg_18.predict(kf_X_test)
+        # df_test['random_forest_19'] = rf_reg_19.predict(kf_X_test)
+        # df_test['random_forest_20'] = rf_reg_20.predict(kf_X_test)
+        # df_test['random_forest_21'] = rf_reg_21.predict(kf_X_test)
+        # df_test['random_forest_22'] = rf_reg_22.predict(kf_X_test)
+        # df_test['random_forest_23'] = rf_reg_23.predict(kf_X_test)
+        # df_test['random_forest_24'] = rf_reg_24.predict(kf_X_test)
+        # df_test['random_forest_25'] = rf_reg_25.predict(kf_X_test)
+        # df_test['random_forest_26'] = rf_reg_26.predict(kf_X_test)
+        # df_test['random_forest_27'] = rf_reg_27.predict(kf_X_test)
+        # df_test['random_forest_28'] = rf_reg_28.predict(kf_X_test)
+        # df_test['random_forest_29'] = rf_reg_29.predict(kf_X_test)
+        # df_test['random_forest_30'] = rf_reg_30.predict(kf_X_test)
+        # df_test['random_forest_31'] = rf_reg_31.predict(kf_X_test)
+        # df_test['random_forest_32'] = rf_reg_32.predict(kf_X_test)
+        # df_test['random_forest_33'] = rf_reg_33.predict(kf_X_test)
+        # df_test['random_forest_34'] = rf_reg_34.predict(kf_X_test)
+        # df_test['random_forest_35'] = rf_reg_35.predict(kf_X_test)
+        # df_test['random_forest_36'] = rf_reg_36.predict(kf_X_test)
+        # df_test['random_forest_37'] = rf_reg_37.predict(kf_X_test)
+        # df_test['random_forest_38'] = rf_reg_38.predict(kf_X_test)
+        # df_test['random_forest_39'] = rf_reg_39.predict(kf_X_test)
+        # df_test['random_forest_40'] = rf_reg_40.predict(kf_X_test)
+
+        #print(df_combo.head(10))
+        # print(np.shape(df_combo))
+        # print(np.shape(kf_y_train))
 
         # Linear Regress on that pdframe, with actual label as target
-        lin_reg_2 = LinearRegression()
+        lin_reg_final = LinearRegression()
 
-        lin_reg_2.fit(df_combo[0:1], df_combo[2])
+        lin_reg_final.fit(df_train, kf_y_train)
 
-        train_predict = lin_reg_2.predict(kf_X_train)
+        train_predict = lin_reg_final.predict(df_train)
         train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
         train_rmse_agg.append(train_rmse)
 
-        test_predict = rf_reg.predict(kf_X_test)
+        test_predict = lin_reg_final.predict(df_test)
         test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
         test_rmse_agg.append(test_rmse)
 

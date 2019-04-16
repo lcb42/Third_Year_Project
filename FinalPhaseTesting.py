@@ -296,7 +296,7 @@ kf_y_train_test = np.array(y_train_test)
 test_rmses = []
 train_rmses = []
 
-ns = [2, 5, 10, 20, 50, 100, 200]
+ns = [5, 50]
 
 for n in ns:
 
@@ -310,7 +310,7 @@ for n in ns:
         kf_y_train, kf_y_test = kf_y_train_test[train_index], kf_y_train_test[test_index]
 #///////////////////////////////////////////////////////////////////////////////
 
-        # reg = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1, random_state=0)
+        reg = RandomForestRegressor(max_depth=10, max_features=0.6, n_estimators=20, bootstrap=False, n_jobs=-1, random_state=0)
         # reg = BayesianRidge(n_iter=20, fit_intercept=n, normalize=True)
         # reg = Ridge(alpha=0.5, fit_intercept=False, solver="auto")
         # reg = ExtraTreesRegressor(n_estimators=20, criterion="mse", max_depth=20, n_jobs=-1, random_state=0, min_samples_split=45, min_impurity_split=2)
@@ -321,18 +321,18 @@ for n in ns:
         # reg.fit(kf_X_train, kf_y_train)
 
         # bag = BaggingRegressor(base_estimator=reg, n_estimators=100, max_samples=0.9, bootstrap=True, bootstrap_features=False, max_features=1.0, n_jobs=-1, random_state=0)
-        # bag = BaggingRegressor(base_estimator=reg, n_estimators=50, max_samples=1.0, max_features=1.0, bootstrap=n, n_jobs=-1, random_state=0)
+        bag = BaggingRegressor(base_estimator=reg, n_estimators=n, max_samples=1.0, max_features=1.0, bootstrap=False, n_jobs=-1, random_state=0)
         # ada = AdaBoostRegressor(base_estimator=reg, learning_rate=0.1, n_estimators=50, loss=n) <- ADABoost with Random Forest Reg.
         # ada = AdaBoostRegressor(base_estimator=reg, learning_rate=0.01, n_estimators=20, loss=n)
 
-        grd = GradientBoostingRegressor(loss='ls', learning_rate=0.4, n_estimators=60, subsample=1, criterion='mse', max_depth=n, random_state=0)
-        grd.fit(kf_X_train, kf_y_train)
+        # grd = GradientBoostingRegressor(loss='ls', learning_rate=0.4, n_estimators=60, subsample=1, criterion='mse', max_depth=n, random_state=0)
+        bag.fit(kf_X_train, kf_y_train)
 
-        train_predict = grd.predict(kf_X_train)
+        train_predict = bag.predict(kf_X_train)
         train_rmse = np.sqrt(((kf_y_train - train_predict) ** 2).mean())
         train_rmse_agg.append(train_rmse)
 
-        test_predict = grd.predict(kf_X_test)
+        test_predict = bag.predict(kf_X_test)
         test_rmse = np.sqrt(((kf_y_test - test_predict) ** 2).mean())
         test_rmse_agg.append(test_rmse)
 
@@ -361,7 +361,7 @@ plt.plot(ns, train_rmses, "r*", label="Train RMSE")
 plt.plot(ns, test_rmses, c='b')
 plt.plot(ns, train_rmses, c='r')
 plt.ylabel("RMSE Score")
-plt.xlabel("max_depth Hyperparameter Values")
+plt.xlabel("n_estimators Hyperparameter Values")
 plt.xscale("log")
 plt.legend()
 plt.show()
